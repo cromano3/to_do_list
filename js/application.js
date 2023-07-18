@@ -11,7 +11,11 @@ function getItems(){
       
       $('#contentList').empty();
 
-      response.tasks.forEach(function(task){
+      var sortedItems = response.tasks.sort(function (a, b) {
+        return Date.parse(a.created_at) - Date.parse(b.created_at);
+      });
+
+      sortedItems.forEach(function(task){
         if((task.completed && currentFilter === "complete") ||
           (!task.completed && currentFilter === "active") ||
           (currentFilter === "all") ||
