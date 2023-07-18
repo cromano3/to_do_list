@@ -11,7 +11,7 @@ function getItems(){
 
       response.tasks.forEach(function(task){
         var taskHTML = `<div class="listItem">
-        <ion-checkbox label-placement="start" checked=${task.completed}></ion-checkbox>
+        <input type="checkbox" class="checkbox" data-id="${task.id}" ${task.completed ? "checked" : ""}>
         <p>${task.content}</p>
         <button class="btn btn-light btn-sm remove" data-id="${task.id}">Remove</button>
         </div>`
@@ -73,6 +73,7 @@ function setItemCompleted(id){
     },
     error: function (request, textStatus, errorMessage) {
       console.log(errorMessage);
+      getItems();
     }
   }); 
 
@@ -89,6 +90,7 @@ function setItemIncomplete(id){
     },
     error: function (request, textStatus, errorMessage) {
       console.log(errorMessage);
+      getItems();
     }
   }); 
 
@@ -104,7 +106,7 @@ function setAddItemEvent(){
       return;
     }
 
-    $('#new-to-do-input input').val('');
+    $('#new-to-do-input').val('');
 
     sendNewItem(newItem);
 
@@ -113,15 +115,13 @@ function setAddItemEvent(){
 }
 
 function setToggleCompletedEvent(){
-  $(document).on('click', 'ion-checkbox', function (event) {
+  $(document).on('click', '.checkbox', function (event) {
     var id = $(this).data('id');
-    if ($(this).checked()) {
+    if ($(this).is(':checked')) {
       setItemCompleted(id);
-    }
-    else{
+    } else {
       setItemIncomplete(id);
     }
-    
   });
 }
 
