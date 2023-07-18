@@ -1,0 +1,29 @@
+body{
+  background: #e0e0e0;
+}
+
+#to-do-list{
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 16px 16px rgba(0,0,0,0.3);
+}
+
+#to-do-list > *{
+  padding: 8px 16px;
+}
+
+#new-to-do-input{
+  flex-grow: 1;
+  margin-right: 8px;
+}
+
+#add-to-do-row {
+  padding: 8px 16px;
+  border-bottom: 1px solid #cbcdcf;
+  display: flex;
+  justify-content: space-between;
+}
+
+p{
+  margin: 0;
+}
