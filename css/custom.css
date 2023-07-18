@@ -36,8 +36,8 @@ p{
 }
 
 .listItem p {
-  flex-grow: 1; /* Add this line to make the paragraph take up remaining space */
-  margin: 0 10px; /* Add this line to give space around the paragraph */
+  flex-grow: 1;
+  margin: 0 10px;
 }
 
 input.checkbox{
@@ -45,3 +45,29 @@ input.checkbox{
   width: 16px;
   height: 16px;
 }
+
+#bottomRow{
+  border-top: 1px solid #cbcdcf;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#bottomRowText{
+  flex-grow: 1;
+}
+
+#bottomRow > *:not(:first-child){
+  margin-left: 8px;
+}
+
+.filterButton{
+  background-color: rgb(205, 245, 245);
+  outline: none;
+}
+
+.btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn.active.focus {
+  background-color: rgb(100, 219, 219);
+  outline: none;
+}
+

@@ -18,6 +18,8 @@ function getItems(){
         $('#contentList').append(taskHTML);
       });
 
+      $("#itemsLeft").text(response.tasks.length);
+
 
     },
     error: function (request, textStatus, errorMessage) {
