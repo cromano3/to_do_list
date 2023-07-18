@@ -67,6 +67,10 @@ input.checkbox{
 }
 
 .btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn.active.focus {
+  outline: none;
+}
+
+.active-filter {
   background-color: rgb(100, 219, 219);
   outline: none;
 }

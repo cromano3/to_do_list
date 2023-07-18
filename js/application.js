@@ -1,3 +1,5 @@
+var currentFilter = ""; 
+
 function getItems(){
   $.ajax({
     type: 'GET',
@@ -10,12 +12,19 @@ function getItems(){
       $('#contentList').empty();
 
       response.tasks.forEach(function(task){
-        var taskHTML = `<div class="listItem">
-        <input type="checkbox" class="checkbox" data-id="${task.id}" ${task.completed ? "checked" : ""}>
-        <p>${task.content}</p>
-        <button class="btn btn-light btn-sm remove" data-id="${task.id}">Remove</button>
-        </div>`
-        $('#contentList').append(taskHTML);
+        if((task.completed && currentFilter === "complete") ||
+          (!task.completed && currentFilter === "active") ||
+          (currentFilter === "all") ||
+          (!currentFilter)
+        ){
+          var taskHTML = `<div class="listItem">
+          <input type="checkbox" class="checkbox" data-id="${task.id}" ${task.completed ? "checked" : ""}>
+          <p>${task.content}</p>
+          <button class="btn btn-light btn-sm remove" data-id="${task.id}">Remove</button>
+          </div>`
+          $('#contentList').append(taskHTML);
+        }
+        
       });
 
       $("#itemsLeft").text(response.tasks.length);
@@ -71,7 +80,7 @@ function setItemCompleted(id){
     dataType: 'json',
     success: function (response, textStatus) {
       console.log(response);
-      // getItems();
+      getItems();
     },
     error: function (request, textStatus, errorMessage) {
       console.log(errorMessage);
@@ -88,7 +97,7 @@ function setItemIncomplete(id){
     dataType: 'json',
     success: function (response, textStatus) {
       console.log(response);
-      // getItems();
+      getItems();
     },
     error: function (request, textStatus, errorMessage) {
       console.log(errorMessage);
@@ -135,11 +144,35 @@ function setDeleteEvent(){
   });
 }
 
+function setFilters(){
+
+  $('.filterButton').on('click', function () {
+
+    $('.filterButton').removeClass('active-filter');
+    $(this).addClass('active-filter');
+
+    var filter = $(this).attr('id');
+
+    if (filter === 'allFilter') {
+      currentFilter = "all";
+    } else if (filter === 'activeFilter') {
+      currentFilter = "active";
+    } else if (filter === 'completeFilter') {
+      currentFilter = "complete";
+    }
+
+    getItems();
+    
+  });
+
+}
+
 $(document).ready(function () {
 
   getItems();
   setAddItemEvent();
   setToggleCompletedEvent();
   setDeleteEvent();
+  setFilters();
   
 });
