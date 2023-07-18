@@ -27,8 +27,11 @@ function getItems(){
         
       });
 
-      $("#itemsLeft").text(response.tasks.length);
-
+      var completedTasksCount = response.tasks.reduce(function(count, task) {
+        return task.completed ? count : count + 1;
+      }, 0);
+      
+      $("#itemsLeft").text(completedTasksCount);
 
     },
     error: function (request, textStatus, errorMessage) {
@@ -64,7 +67,7 @@ function deleteItem(id){
     url: `https://fewd-todolist-api.onrender.com/tasks/${id}?api_key=239`,
     success: function (response, textStatus) {
       console.log(response);
-      // getItems();
+      getItems();
     },
     error: function (request, textStatus, errorMessage) {
       console.log(errorMessage);
@@ -162,7 +165,7 @@ function setFilters(){
     }
 
     getItems();
-    
+
   });
 
 }

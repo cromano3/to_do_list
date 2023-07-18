@@ -28,7 +28,7 @@ body{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 8px;
+  padding: 8px 0px;
 }
 
 p{
@@ -73,5 +73,9 @@ input.checkbox{
 .active-filter {
   background-color: rgb(100, 219, 219);
   outline: none;
+}
+
+#contentList{
+  padding: 0px 16px;
 }
 
